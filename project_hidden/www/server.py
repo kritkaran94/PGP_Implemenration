@@ -8,8 +8,8 @@ app = flask.Flask(__name__)
 app.debug = True
 app.secret_key = 'iaeuwefLRN7DPU5vXAjr4gdGCdCvPY8BdjyFNHTzE8PfADcC'
 
-gmail_user = 'kritkaran21@gmail.com'
-gmail_pwd = 'satpalsingh'
+gmail_user = 'xyz@gmail.com'
+gmail_pwd = 'xxxxxx'
 
 @app.route('/')
 def index():
