@@ -1,0 +1,108 @@
+<!--  Author : Krit Karan Singh
+      Project : PGP message creation
+
+-->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>PGP</title>
+        <script src="static/js/openpgp.js"></script>
+        <script>
+var publicKeyString = "-----BEGIN PGP PUBLIC KEY BLOCK-----\n" +
+"Version: Version: GnuPG v1\n" +
+"Comment: GPGTools - http://gpgtools.org\n" +
+"\n" +
+
+"mQENBFcHkGYBCADX4Vf73setrfRWzoDsEzM8K1/+ae6VMnJs8qtFsNaBsEFYbVyp\n"+
+"nh+1Jfci7QZIz50+f4PCIiAL0bHwtEKIshOv1yQ3G5x8v4BTooTQ0G4gP7n131tl\n"+
+"WthJtXxPTC9uxEnhA2PI35sCit68QAixO9MV3UQ6AcMu+GDXTWZilFI44P/IY7lK\n"+
+"5GC07r0tSEsQKVh45KCszUaf24LjqS7RRP3suQB18BQr6vpMh5HsvqmL7+6CZBFW\n"+
+"afPVmMgGubWBqn+oA3cTQAShs1aJnyHVNA8PfWA4h2c1603r6SdIOpe2WhSb2WDn\n"+
+"Thq5R21V2mOBt7B1f3zrPyREb3MeC2aGlTbDABEBAAG0JWtyaXRrYXJhbiAoaGkp\n"+
+"IDxrcml0a2FyYTIxQGdtYWlsLmNvbT6JATgEEwECACIFAlcHkGYCGwMGCwkIBwMC\n"+
+"BhUIAgkKCwQWAgMBAh4BAheAAAoJENSTxIHkVMu/hmUH/AvKI43TS9HVKtW0QSVp\n"+
+"h5EczVAqMzVFsdJesxM/AwqtF8oMnBglnKHsuR1NY+5Pc6mOZHVFPRnmcqcpWtnz\n"+
+"q9t7GGWwARPDTCnVa933VEd3F5Mcoitg22BQsS0D+y73USWA4E1DnZKvLCEQHd33\n"+
+"rWuuzYkrZgcan6nGKn/u6xS6nIH2iNe55BuIyQ9CcwViLm6NA/Yp9Na+gbSBp+SF\n"+
+"zfUcdYcfh+eIvAuh7DB770musnxJNjIafWaThYsEsllgNOAR2zfBWRNLYwgXBNhC\n"+
+"P40mKpEmJF+ASQrDiasg1MTZvXh0W+nXFbasx2WjOkxZE92k40cKQzKFNl1RQimy\n"+
+"6cu5AQ0EVweQZgEIALxp7SU+7hg93k2ti4rVsyRYi2N/p74GkHwbP3jxWgnJ/ZX7\n"+
+"URepuw5b++02NnCwEHC5f1AalXvxO2D6eNcuo2RQ3zfBC76vtNydJeKdAh0YBrBI\n"+
+"L/XLucCezrSE8/s0GVb2TFc0bGP8JbiUlwuED4ZNC9A6JCJsCL6Oaup4b/kyhViK\n"+
+"3vfZXM0m17MkyZKzshWO00RIdOpgI7beKWSGV4iYp3uHKgaNpvdGkH2HCV5yAuOR\n"+
+"EqoBJQzdMEqUEm2CqfqZNpXm0hrC06wKQDNbP3b5Y1pIRWHWW63waaiK7+bDDNou\n"+
+"4DazgiYOx/NRmcfCMgsCVJVfKgEcSY6pt5z4lQ8AEQEAAYkBHwQYAQIACQUCVweQ\n"+
+"ZgIbDAAKCRDUk8SB5FTLv1rqB/9sRaqEOIEfzzEwCqopBUvy+e1PeOkwaNM8D5ak\n"+
+"7IbVY8sA2jN8x7ycHsz8XZY/VBKTgIC0KDf8jq/zBXKDTpUF7Rjog+v3TDgWBDRn\n"+
+"wG51+rloCskgu2nh7ZMir+2+cjVd+45QjtoMGff3kJr5/hKQt+SkH86MKjiDYdju\n"+
+"LWMpokbm57hWiT7Y/IgirrEPI7+NeI/CqVKlAezU+dvkdyW3c374jyn88DihOKJU\n"+
+"IXuKZAxoHS6eMqWeujG/CsMzSnAP/H5UwmS0G/L3v6C4RH3DohoiHRBLB6YMijST\n"+
+"64g5nIYi9aYIMMaTzEu98HoB5a1qz0O6k9s5Jk7FQTO6s92k\n"+
+"=GtTk\n"+
+"-----END PGP PUBLIC KEY BLOCK-----";
+
+        </script>
+<style>
+
+div 
+{
+    width: 320px;
+    padding: 100px;
+    border: 2px solid black;
+    margin: 0;
+}
+</style>
+
+    </head>
+    <body background="http://images.all-free-download.com/images/graphiclarge/wood_background_hd_picture_5_169810.jpg">
+        <h1><center>PGP Credibility</center></h1>
+        <div>
+        <form action="contact" id="contact-form" method="post">
+            <label>
+                E-mail :
+                <input type="email" id="email"></input>
+            </label>
+            <br>
+            <br>
+            <label>
+                Message :
+                <textarea id="message"></textarea>
+            </label>
+            <br>
+            <br>
+            <input type="submit"></input>
+        </form>
+        </div>
+        <script>
+            function OnSubmit(ev)
+            {
+                openpgp.init();
+                var publicKeys = openpgp.read_publicKey(publicKeyString);
+
+                var email = document.getElementById("email");
+                var message = document.getElementById("message");
+                var plaintext = "From: " + email.value + "\n\n" + message.value;
+                var ciphertext = openpgp.write_encrypted_message(publicKeys,
+                 plaintext);
+
+                var hiddenInput = document.createElement("input");
+                hiddenInput.type = "hidden";
+                hiddenInput.name = "message";
+                hiddenInput.value = ciphertext;
+
+                contactForm.appendChild(hiddenInput);
+            }
+
+            var contactForm = document.getElementById("contact-form");
+            if (contactForm.addEventListener)
+            {
+                contactForm.addEventListener("submit", OnSubmit, false);
+            }
+            else if (contactForm.attachEvent)
+            {
+                contactForm.attachEvent("onsubmit", OnSubmit);
+            }
+        </script>
+    </body>
+</html>
